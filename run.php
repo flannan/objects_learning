@@ -3,11 +3,15 @@
 
 namespace test;
 
+//use test;
 //use Circle;
+
 include_once __DIR__ . '/Circle.php';
 include_once __DIR__ . '/Random.php';
 include_once __DIR__ . '/UrlInterface.php';
 include_once __DIR__ . '/Url.php';
+include_once __DIR__ . '/Square.php';
+include_once __DIR__ . '/SquaresGenerator.php';
 
 
 echo 'testing Circle class' . PHP_EOL;
@@ -45,3 +49,11 @@ echo $url->getQueryParam('key') . PHP_EOL; // value
 // второй параметр - значение по умолчанию
 echo $url->getQueryParam('key2', 'lala') . PHP_EOL; // value2
 echo $url->getQueryParam('new', 'ehu') . PHP_EOL; // ehu
+
+echo 'testing Square class' . PHP_EOL;
+$square = new Square(10);
+echo $square->getSide() . PHP_EOL; // 10
+
+echo 'testing SquaresGenerator class' . PHP_EOL;
+$squares = SquaresGenerator::generate(3, 2);
+var_export($squares);
