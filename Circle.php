@@ -10,7 +10,7 @@ namespace test;
  */
 class Circle
 {
-    public $radius = 0;
+    protected $radius = 0;
 
     /**
      * Circle constructor.
