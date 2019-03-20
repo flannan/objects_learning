@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 
 namespace test;
@@ -16,7 +17,7 @@ class SquaresGenerator
      *
      * @return array
      */
-    public static function generate($side, $numberOfSquares)
+    public static function generate(float $side, int $numberOfSquares): array
     {
         $squares = [];
         for ($key = 0; $key < $numberOfSquares; $key++) {

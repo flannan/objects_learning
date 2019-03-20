@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 
 namespace test;
@@ -19,9 +20,9 @@ class Random
     /**
      * Random constructor.
      *
-     * @param $seed
+     * @param int $seed
      */
-    public function __construct($seed)
+    public function __construct(int $seed)
     {
         $this->seed = $seed;
         $this->state = $seed;
@@ -32,13 +33,13 @@ class Random
      *
      * @return int
      */
-    public function getNext()
+    public function getNext(): int
     {
         $this->state = ($this->state * $this->multiplier + $this->increment) % $this->modulus;
         return $this->state;
     }
 
-    public function reset()
+    public function reset(): void
     {
         $this->state = $this->seed;
     }

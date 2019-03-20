@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace test;
 
@@ -14,27 +15,27 @@ class Circle
     /**
      * Circle constructor.
      *
-     * @param int $inputRadius
+     * @param float $inputRadius
      */
-    public function __construct($inputRadius)
+    public function __construct(float $inputRadius)
     {
         $this->radius = $inputRadius;
     }
 
     /** Вычисляет площадь круга
      *
-     * @return float|int
+     * @return float
      */
-    public function getArea()
+    public function getArea(): float
     {
         return (M_PI * $this->radius * $this->radius);
     }
 
     /** Вычисляет длину окружности круга.
      *
-     * @return float|int
+     * @return float
      */
-    public function getCircumference()
+    public function getCircumference(): float
     {
         return (2 * M_PI * $this->radius);
     }

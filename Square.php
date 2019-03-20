@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 
 namespace test;
@@ -15,14 +16,17 @@ class Square
     /**
      * Square constructor.
      *
-     * @param $side
+     * @param float $side
      */
-    public function __construct($side)
+    public function __construct(float $side)
     {
         $this->side=$side;
     }
 
-    public function getSide()
+    /**
+     * @return float
+     */
+    public function getSide(): float
     {
         return $this->side;
     }

@@ -1,7 +1,10 @@
 <?php
+declare(strict_types=1);
 
 
 namespace test;
+
+use function array_key_exists;
 
 /**
  * Class Url
@@ -18,16 +21,16 @@ class Url implements UrlInterface
      *
      * @param string $address
      */
-    public function __construct($address)
+    public function __construct(string $address)
     {
         $this->address = parse_url($address);
-        $this->queryParamsArray=$this->parseQuery();
+        $this->queryParamsArray = $this->parseQuery();
     }
 
     /**
      * @return mixed
      */
-    public function getScheme()
+    public function getScheme(): string
     {
         return $this->address['scheme'];
     }
@@ -35,7 +38,7 @@ class Url implements UrlInterface
     /**
      * @return mixed
      */
-    public function getHost()
+    public function getHost(): string
     {
         return $this->address['host'];
     }
@@ -43,7 +46,7 @@ class Url implements UrlInterface
     /**
      * @return mixed
      */
-    public function getQueryParams()
+    public function getQueryParams(): array
     {
         return $this->queryParamsArray;
     }
@@ -51,7 +54,7 @@ class Url implements UrlInterface
     /**
      * @return mixed
      */
-    public function parseQuery()
+    protected function parseQuery(): array
     {
         $queryParamsArray = [];
         $params = explode('&', $this->address['query']);
@@ -70,7 +73,7 @@ class Url implements UrlInterface
      *
      * @return mixed|string|null
      */
-    public function getQueryParam($key, $default = null)
+    public function getQueryParam($key, $default = null): string
     {
         $answer = $default;
         $params = $this->getQueryParams();
