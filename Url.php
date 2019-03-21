@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace test;
 
-use function array_key_exists;
+use mysql_xdevapi\Exception;
 
-/**
- * Class Url
+/** Класс для работы с переданным в поле ввода URL.
  *
  * @package test
  */
@@ -16,19 +15,29 @@ class Url implements UrlInterface
     protected $address;
     protected $queryParamsArray;
 
-    /**
-     * Url constructor.
+    /** Конструктор класса
      *
      * @param string $address
      */
     public function __construct(string $address)
     {
+        $this->changeURL($address);
+    }
+
+    /** Меняет URL, используемый в объекте.
+     * @param string $address
+     */
+    public function changeURL(string $address): void
+    {
         $this->address = parse_url($address);
+        if ($this->address === false) {
+            throw new Exception('Cannot parse malformed URL');
+        }
         $this->queryParamsArray = $this->parseQuery();
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getScheme(): string
     {
@@ -36,7 +45,7 @@ class Url implements UrlInterface
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getHost(): string
     {
@@ -44,15 +53,16 @@ class Url implements UrlInterface
     }
 
     /**
-     * @return mixed
+     * @return array
      */
     public function getQueryParams(): array
     {
         return $this->queryParamsArray;
     }
 
-    /**
-     * @return mixed
+    /** Разбирает query-строку на ключи.
+     *
+     * @return array
      */
     protected function parseQuery(): array
     {
@@ -67,13 +77,13 @@ class Url implements UrlInterface
         return $queryParamsArray;
     }
 
-    /**
+    /** Возвращает значение конкретного ключа.
      * @param        $key
-     * @param string $default
+     * @param string $default - значение по умолчанию
      *
      * @return mixed|string|null
      */
-    public function getQueryParam($key, $default = null): string
+    public function getQueryParam($key, $default = null): ?string
     {
         $answer = $default;
         $params = $this->getQueryParams();
