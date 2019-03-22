@@ -52,6 +52,8 @@ echo $url->getQueryParam('key') . PHP_EOL; // value
 echo $url->getQueryParam('key2', 'lala') . PHP_EOL; // value2
 echo $url->getQueryParam('new', 'ehu') . PHP_EOL; // ehu
 
+
+
 echo 'testing Square class' . PHP_EOL;
 $square = new Square(10);
 echo $square->getSide() . PHP_EOL; // 10

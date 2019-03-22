@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace test;
 
-use mysql_xdevapi\Exception;
+use InvalidArgumentException;
 
 /** Класс для работы с переданным в поле ввода URL.
  *
@@ -21,19 +21,46 @@ class Url implements UrlInterface
      */
     public function __construct(string $address)
     {
-        $this->changeURL($address);
+        $this->parseURL($address);
     }
 
-    /** Меняет URL, используемый в объекте.
+    /** Принимает новый URL снаружи
+     *
      * @param string $address
      */
     public function changeURL(string $address): void
     {
+        $this->parseURL($address);
+    }
+
+    /** Разбирает URL и сохраняет результат в свойствах объекта.
+     *
+     * @param string $address
+     */
+    protected function parseURL(string $address): void
+    {
         $this->address = parse_url($address);
         if ($this->address === false) {
-            throw new Exception('Cannot parse malformed URL');
+            throw new InvalidArgumentException('Cannot parse malformed URL. URL was: ' . $address);
         }
         $this->queryParamsArray = $this->parseQuery();
+    }
+
+    /** Разбирает query-строку на ключи.
+     *
+     * @return array
+     */
+    protected function parseQuery(): array
+    {
+        $queryParamsArray = [];
+        $params = explode('&', $this->address['query']);
+        //var_export($params);
+        foreach ($params as $param) {
+            $paramArray = explode('=', $param);
+            //var_export($paramArray);
+            $queryParamsArray[$paramArray[0]] = $paramArray[1];
+        }
+        return $queryParamsArray;
     }
 
     /**
@@ -60,24 +87,8 @@ class Url implements UrlInterface
         return $this->queryParamsArray;
     }
 
-    /** Разбирает query-строку на ключи.
-     *
-     * @return array
-     */
-    protected function parseQuery(): array
-    {
-        $queryParamsArray = [];
-        $params = explode('&', $this->address['query']);
-        //var_export($params);
-        foreach ($params as $param) {
-            $paramArray = explode('=', $param);
-            //var_export($paramArray);
-            $queryParamsArray[$paramArray[0]] = $paramArray[1];
-        }
-        return $queryParamsArray;
-    }
-
     /** Возвращает значение конкретного ключа.
+     *
      * @param        $key
      * @param string $default - значение по умолчанию
      *
