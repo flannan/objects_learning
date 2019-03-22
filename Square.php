@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace test;
 
-/**
- * Class Square
+use function assert;
+use UnexpectedValueException;
+
+/** Класс квадратов.
  *
  * @package test
  */
@@ -13,13 +15,12 @@ class Square
 {
     protected $side;
 
-    /**
-     * Square constructor.
-     *
+    /** Конструктор
      * @param float $side
      */
     public function __construct(float $side)
     {
+        assert($side>0, new UnexpectedValueException('Positive side expected'));
         $this->side=$side;
     }
 

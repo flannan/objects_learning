@@ -59,5 +59,5 @@ $square = new Square(10);
 echo $square->getSide() . PHP_EOL; // 10
 
 echo 'testing SquaresGenerator class' . PHP_EOL;
-$squares = SquaresGenerator::generate(3, 2);
+$squares = SquaresGenerator::generate(3, 3);
 var_export($squares);

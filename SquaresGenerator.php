@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace test;
 
 /**
- * Class SquaresGenerator
+ * Класс SquaresGenerator. Создаёт массив одинаковых квадратов класса Square.
  *
  * @package test
  */

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace test;
 
-/**
- * Class Random - random number generator.
+/**Генератор случайных чисел.
+ * Использует линейный конгруэнтный метод: https://en.wikipedia.org/wiki/Linear_congruential_generator
  *
  * @package test
  */
@@ -17,19 +17,22 @@ class Random
     private $multiplier = 106;
     private $increment = 1283;
 
-    /**
-     * Random constructor.
+    /** Конструктор.
      *
-     * @param int $seed
+     * @param int $seed Принимает на вход стартовое значение для генератора.
+     *                  По умолчанию - использует текущее время в системе.
      */
-    public function __construct(int $seed)
+    public function __construct(int $seed = null)
     {
-        $this->seed = $seed;
+        if ($seed === null) {
+            $seed = time() % $this->modulus;
+        } else {
+            $this->seed = $seed;
+        }
         $this->state = $seed;
     }
 
-    /** generates and returns a new state of a random number generator (with Linear congruential method)
-     * https://en.wikipedia.org/wiki/Linear_congruential_generator
+    /** Создаёт и возвращает следующее значение генератора.
      *
      * @return int
      */

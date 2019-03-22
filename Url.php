@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace test;
 
+use function array_key_exists;
 use InvalidArgumentException;
 
 /** Класс для работы с переданным в поле ввода URL.
