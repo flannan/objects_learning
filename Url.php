@@ -44,7 +44,11 @@ class Url implements UrlInterface
         if ($this->address === false) {
             throw new InvalidArgumentException('Cannot parse malformed URL. URL was: ' . $address);
         }
-        $this->queryParamsArray = $this->parseQuery();
+        if (array_key_exists('query', $this->address)) {
+            $this->queryParamsArray = $this->parseQuery();
+        } else {
+            $this->queryParamsArray = [];
+        }
     }
 
     /** Разбирает query-строку на ключи.
