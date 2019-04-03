@@ -32,6 +32,19 @@ class Random
         $this->state = $seed;
     }
 
+    /** Задаёт альтернативные значения параметров генерации.
+     *
+     * @param int $newModulus
+     * @param int $newMultiplier
+     * @param int $newIncrement
+     */
+    public function setParameters(int $newModulus, int $newMultiplier, int $newIncrement): void
+    {
+        $this->modulus = $newModulus;
+        $this->multiplier = $newMultiplier;
+        $this->increment = $newIncrement;
+    }
+
     /** Создаёт и возвращает следующее значение генератора.
      *
      * @return int

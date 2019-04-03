@@ -3,8 +3,7 @@ declare(strict_types=1);
 
 namespace test;
 
-use function assert;
-use UnexpectedValueException;
+use InvalidArgumentException;
 
 /** Реализуйте класс Circle для описания кругов.
  * У круга есть только одно свойство - его радиус.
@@ -29,6 +28,7 @@ class Circle
 
 
     /** Меняет радиус круга
+     *
      * @param float $inputRadius
      */
     public function setRadius(float $inputRadius): void
@@ -42,10 +42,9 @@ class Circle
      */
     protected function checkRadius(float $inputRadius): void
     {
-        assert(
-            $inputRadius >= 0,
-            new UnexpectedValueException('positive radius expected. Received radius was ' . $inputRadius)
-        );
+        if ($inputRadius < 0) {
+            throw new InvalidArgumentException('positive radius expected. Received radius was ' . $inputRadius);
+        }
     }
 
 

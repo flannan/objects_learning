@@ -20,6 +20,7 @@ echo 'testing Circle class' . PHP_EOL;
 $circle = new Circle(10);
 echo $circle->getArea() . PHP_EOL;
 echo $circle->getCircumference() . PHP_EOL;
+echo $circle->setRadius(-2) . PHP_EOL;
 
 echo 'testing Random class' . PHP_EOL;
 
