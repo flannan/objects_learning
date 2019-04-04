@@ -45,6 +45,9 @@ class RandomTest extends TestCase
 
     /**
      * @dataProvider sampleSequenceProvider
+     *
+     * @param array $settings
+     * @param array $sequence
      */
     public function testSampleSequence(array $settings, array $sequence): void
     {

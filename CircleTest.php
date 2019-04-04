@@ -17,7 +17,7 @@ class CircleTest extends TestCase
         require_once __DIR__ . '/Circle.php';
     }
 
-    public function testGetArea()
+    public function testGetArea(): void
     {
         $circle = new Circle(1);
         $this::assertSame($circle->getArea(), M_PI);
@@ -25,7 +25,7 @@ class CircleTest extends TestCase
         $this::assertSame($circle->getArea(), 4 * M_PI);
     }
 
-    public function testSetRadius()
+    public function testSetRadius(): void
     {
         $circle = new Circle(1);
 
@@ -34,7 +34,7 @@ class CircleTest extends TestCase
         $this::fail('no exception');
     }
 
-    public function testGetCircumference()
+    public function testGetCircumference(): void
     {
         $circle = new Circle(1);
         $this::assertSame($circle->getCircumference(), 2 * M_PI);
@@ -42,7 +42,7 @@ class CircleTest extends TestCase
         $this::assertSame($circle->getCircumference(), 4 * M_PI);
     }
 
-    public function test__construct()
+    public function test__construct(): void
     {
         $this::assertIsObject(new Circle(1));
     }
